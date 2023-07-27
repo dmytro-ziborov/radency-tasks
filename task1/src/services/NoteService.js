@@ -120,14 +120,15 @@ class NoteService {
     //creates default set of notes
     populateNotes() {
         return [
-            this.createNote("Shopping List", 1, "Tomatoes, bread", false),
+            this.createNote("Shopping List", 1, "Tomatoes, water, bread", false),
             this.createNote("Outer life", 2, "Should we look for life beyond Earth?"),
-            this.createNote("3", 1, "I need to dantist 5/12/2023"),
-            this.createNote("4", 1, "Tomatoes, bread"),
-            this.createNote("5", 1, "Tomatoes, bread"),
-            this.createNote("6", 1, "Tomatoes, bread"),
-            this.createNote("7", 1, "Tomatoes, bread"),
-            this.createNote("8", 1, "Tomatoes, bread", false),
+            this.createNote("Make pull request", 1, "make pull request 6/28/2023 or 7/7/2023"),
+            this.createNote("Wake up", 3, "tomorrow (7/29/2023) at 6 am or later"),
+            this.createNote("Start pet project", 3, "do something cool or not"),
+            this.createNote("Stand by", 2, "there must be something"),
+            this.createNote("", 1, ""),
+            this.createNote("Previous note is empty", 2, "yep, it's possible. I have many empty real notes :D"),
+            this.createNote("it's hidden idea", 3, "hidden idea - already idea", false),
         ]
     }
 }
