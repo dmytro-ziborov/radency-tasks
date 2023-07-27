@@ -22,10 +22,10 @@ class NoteService {
         }
     }
     //creates object of Note
-    createNote(name, categoryId, content) {
+    createNote(name, categoryId, content, isActive = true) {
         const category = this.getCategoryById(categoryId);
         const dates = this.parseDates(content);
-        return new Note(name, category, content, dates);
+        return new Note(name, category, content, dates, isActive);
     }
     //returns note by id, if note not found - throws error
     getNoteById(id) {
@@ -99,7 +99,7 @@ class NoteService {
     getCategoryStatistics(category) {
         return {
             category: category,
-            active: this.getActiveNotes().filter(note => note.category.id === id).length,
+            active: this.getActiveNotes().filter(note => note.category.id === category.id).length,
             archived: this.getArchivedNotes().filter(note => note.category.id === category.id).length,
             notes: this.getArchivedNotes().filter(note => note.category.id === category.id)
         }
@@ -120,7 +120,7 @@ class NoteService {
     //creates default set of notes
     populateNotes() {
         return [
-            this.createNote("Shopping List", 1, "Tomatoes, bread"),
+            this.createNote("Shopping List", 1, "Tomatoes, bread", false),
             this.createNote("Outer life", 2, "Should we look for life beyond Earth?"),
             this.createNote("3", 1, "I need to dantist 5/12/2023"),
             this.createNote("4", 1, "Tomatoes, bread"),
