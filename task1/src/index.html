@@ -156,7 +156,15 @@
 
 <!-- Template for active note actions-->
 <template id="note-active-actions">
-  <i class="action bi bi-pencil-fill" id="edit"></i>
+  <a
+    role="button"
+    id="edit"
+    action="edit"
+    data-bs-toggle="modal"
+    data-bs-target="#note-form"
+  >
+    <i class="action bi bi-pencil-fill"></i>
+  </a>
   <i class="action bi bi-archive-fill" id="archive"></i>
   <i class="action bi bi-trash-fill" id="delete"></i>
 </template>
