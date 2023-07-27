@@ -1,5 +1,5 @@
-import Category from "../models/Category";
-import Note from "../models/Note";
+import Category from "../models/Category.js";
+import Note from "../models/Note.js";
 
 //describes service to work with notes and categories
 class NoteService {
@@ -36,7 +36,7 @@ class NoteService {
     }
     //returns category by id, if category didn't exists in storage - throws Error
     getCategoryById(id) {
-        const category = this.#categories.find(element => element.id == id)
+        const category = this.getCategories().find(element => element.id == id)
         if (!category)
             throw new Error(`Category with ${id} not found`)
         return category;
@@ -120,14 +120,14 @@ class NoteService {
     //creates default set of notes
     populateNotes() {
         return [
-            this.createNote("Shopping List", this.getCategoryById(0), "Tomatoes, bread"),
-            this.createNote("Outer life", this.getCategoryById(1), "Should we look for life beyond Earth?"),
-            this.createNote("3", this.getCategoryById(0), "Tomatoes, bread"),
-            this.createNote("4", this.getCategoryById(0), "Tomatoes, bread"),
-            this.createNote("5", this.getCategoryById(0), "Tomatoes, bread"),
-            this.createNote("6", this.getCategoryById(0), "Tomatoes, bread"),
-            this.createNote("7", this.getCategoryById(0), "Tomatoes, bread"),
-            this.createNote("8", this.getCategoryById(0), "Tomatoes, bread", false),
+            this.createNote("Shopping List", 1, "Tomatoes, bread"),
+            this.createNote("Outer life", 2, "Should we look for life beyond Earth?"),
+            this.createNote("3", 1, "I need to dantist 5/12/2023"),
+            this.createNote("4", 1, "Tomatoes, bread"),
+            this.createNote("5", 1, "Tomatoes, bread"),
+            this.createNote("6", 1, "Tomatoes, bread"),
+            this.createNote("7", 1, "Tomatoes, bread"),
+            this.createNote("8", 1, "Tomatoes, bread", false),
         ]
     }
 }
