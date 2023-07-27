@@ -27,12 +27,49 @@ class NoteService {
         const dates = this.parseDates(content);
         return new Note(name, category, content, dates);
     }
+    //returns note by id, if note not found - throws error
+    getNoteById(id) {
+        const note = this.#notes.find(n => n.id == id)
+        if (!note)
+            throw new Error(`Note with ${id} no found`)
+        return note;
+    }
     //returns category by id, if category didn't exists in storage - throws Error
     getCategoryById(id) {
         const category = this.#categories.find(element => element.id == id)
         if (!category)
             throw new Error(`Category with ${id} not found`)
         return category;
+    }
+    //edits note data
+    editNote(noteId, name, categoryID, content) {
+        const note = this.getNoteById(noteId);
+        const category = this.getCategoryById(categoryID);
+        note.name = name;
+        note.category = category;
+        note.content = content;
+        note.dates = this.parseDates(content)
+    }
+
+    //deletes note from storage
+    deleteNoteById(id) {
+        let index = this.#notes.findIndex(note => note.id === id);
+        if (index === -1)
+            throw new Error(`Note with ${id} not found`);
+        this.#notes.splice(index, 1);
+    }
+
+    //changes note isActive status
+    changeNoteStatus(id) {
+        let note = this.getNoteById(id);
+        if (!note)
+            throw new Error(`Note with ${id} not found`);
+        note.isActive = !note.isActive;
+    }
+
+    //returns all notes
+    getNotes() {
+        return this.#notes;
     }
 
     //parses dates in format m/d/YYYY from content in array
