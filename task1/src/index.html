@@ -37,3 +37,43 @@
     </div>
   </body>
 </html>
+
+<!-- Template for notes table -->
+<template id="note-table-template">
+  <table class="table" id="notes-table">
+    <thead class="table-secondary">
+      <th></th>
+      <th>Name</th>
+      <th>Created</th>
+      <th>Category</th>
+      <th>Content</th>
+      <th>Dates</th>
+      <th>
+        <i class="action bi bi-archive-fill"></i>
+        <i class="action bi bi-trash-fill"></i>
+      </th>
+    </thead>
+    <tbody id="notes-table-data"></tbody>
+  </table>
+</template>
+
+<!-- Template for note-row with actions -->
+<template id="note-row-template">
+  <tr class="table-primary">
+    <td id="symbol">
+      <i class="category-icon"></i>
+    </td>
+    <td id="name"></td>
+    <td id="created"></td>
+    <td id="category"></td>
+    <td id="content"></td>
+    <td id="dates"></td>
+    <td id="actions">
+      <div
+        class="container"
+        id="note-actions"
+        style="justify-content: space-around"
+      ></div>
+    </td>
+  </tr>
+</template>
