@@ -5,9 +5,9 @@ const parentContainer = "active-notes-container";
 
 //table with Active notes
 export const ActiveNoteTable = {
-    create: (notes) => {
+    create: (notes, noteService, renderService) => {
         const container = document.querySelector(`#${parentContainer}`);
-        const table = NoteTableComponent.create(notes, NoteAction.createActive);
+        const table = NoteTableComponent.create(notes, NoteAction.createActive, noteService, renderService);
         container.appendChild(table)
     }
 }

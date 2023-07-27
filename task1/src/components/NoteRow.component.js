@@ -10,19 +10,19 @@ const setData = (row, note) => {
     row.querySelector("#content").textContent = note.content;
     row.querySelector("#dates").textContent = note.dates;
 }
-
-const setActions = (row, note, actions) => {
-    row.querySelector("#actions > #note-actions").appendChild(actions(note))
+//sets actions
+const setActions = (row, note, actions, noteService, renderService) => {
+    row.querySelector("#actions > #note-actions").appendChild(actions(note, noteService, renderService))
 }
 
 //row with Note data
 export const NoteRowComponent = {
     //Creates and fill row 
-    create: (note, actions) => {
+    create: (note, actions, noteService, renderService) => {
         const rowTemplate = document.querySelector(`#${rowTemplateName}`);
         const row = rowTemplate.content.cloneNode(true);
         setData(row, note)
-        setActions(row, note, actions);
+        setActions(row, note, actions, noteService, renderService);
         return row
     }
 }
