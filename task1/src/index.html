@@ -30,13 +30,88 @@
         class="container d-flex flex-row-reverse"
         id="note-creator-container"
       >
-        <button class="btn btn-outline-secondary">Create</button>
+        <button
+          type="button"
+          id="createNoteButton"
+          class="btn btn-outline-secondary"
+          action="add"
+          data-bs-toggle="modal"
+          data-bs-target="#note-form"
+        >
+          Create Note
+        </button>
       </div>
 
       <div class="container" id="statistics-container"></div>
     </div>
   </body>
 </html>
+
+<!-- Modal -->
+
+<div
+  class="modal fade"
+  id="note-form"
+  tabindex="-1"
+  aria-labelledby="NoteFormLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="note-form-header">Header</h1>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div>
+            <label for="name-input" class="form-label">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name-input"
+              placeholder="Enter name"
+            />
+          </div>
+          <div>
+            <label for="category-input" class="form-label">Category</label>
+            <select
+              class="form-select"
+              id="category-input"
+              aria-label="Default select example"
+              form="note-form"
+            ></select>
+          </div>
+          <div>
+            <label for="content-input" class="form-label">Content</label>
+            <textarea
+              class="form-control"
+              id="content-input"
+              placeholder="Enter content"
+              rows="5"
+              cols="20"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<template id="submit-btn-template">
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-bs-dismiss="modal"
+    id="submit-btn"
+  >
+    Text
+  </button>
+</template>
 
 <!-- Template for notes table -->
 <template id="note-table-template">
