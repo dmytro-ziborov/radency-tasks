@@ -101,7 +101,7 @@ const collectData = (form) => {
   return [name, categoryId, content]
 }
 //form creation and edit note
-export const NoteForm = {
+export const NoteFormComponent = {
   create: (noteService, renderService) => {
     const form = document.querySelector(`#${formTemplateName}`);
     fillCategories(noteService, form);
