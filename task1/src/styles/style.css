@@ -1,12 +1,15 @@
 i {
     font-size: 18px;
-    background-color: transparent!important;
+    /* background-color: transparent!important; */
 }
 
-i.category-icon {
+i.category-icon{
     border-radius: 25px;
     background: rgb(136, 136, 136);
     padding: 0.5rem;
+}
+i.action:hover{
+    color:cornflowerblue;
 }
 
 table {
@@ -14,8 +17,9 @@ table {
     border-spacing: 0 0.5rem !important;
 }
 
-table i {
+table i.header-symbol {
     color: white !important;
+    background-color: transparent!important;
 }
 
 .my-table table{
