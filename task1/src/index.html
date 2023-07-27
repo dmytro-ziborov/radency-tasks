@@ -168,3 +168,47 @@
   <i class="action bi bi-archive-fill" id="archive"></i>
   <i class="action bi bi-trash-fill" id="delete"></i>
 </template>
+
+<!-- Template for archived note actions-->
+<template id="note-archived-actions">
+  <i class="action bi bi-arrow-counterclockwise" id="unarchive"></i>
+  <i class="action bi bi-trash-fill" id="delete"></i>
+</template>
+
+<!-- Template for categories statistics table -->
+<template id="category-stats-table-template">
+  <table id="category-stats-table" class="table">
+    <thead>
+      <th></th>
+      <th>Note Category</th>
+      <th>Active</th>
+      <th>Archived</th>
+      <th></th>
+    </thead>
+    <tbody id="stats-data"></tbody>
+  </table>
+</template>
+
+<!-- Template for category statistics row -->
+
+<template id="category-stat-row-template">
+  <tr>
+    <td id="symbol"><i class="category-icon"></i></td>
+    <td id="name"></td>
+    <td id="active"></td>
+    <td id="archived"></td>
+    <td id="open">
+      <i
+        id="category-row-"
+        class="bi bi-arrow-down-up"
+        data-bs-toggle="collapse"
+        role="button"
+        aria-expanded="false"
+        class="table table-primary"
+      ></i>
+    </td>
+  </tr>
+  <tr class="collapse" id="collapse-table-">
+    <td colspan="100%" id="archived-table-container"></td>
+  </tr>
+</template>
