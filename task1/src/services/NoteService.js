@@ -72,6 +72,39 @@ class NoteService {
         return this.#notes;
     }
 
+    //returns notes by status
+    getNotesByStatus(isActive) { return this.getNotes().filter(note => note.isActive === isActive) }
+
+    //returns active notes
+    getActiveNotes() {
+        return this.getNotesByStatus(true);
+    }
+
+    //returns archived notes
+    getArchivedNotes() {
+        return this.getNotesByStatus(false);
+    }
+
+    //returns all categories
+    getCategories() {
+        return this.#categories;
+    }
+
+    //returns all categories statistics
+    getCategoriesStatistics() {
+        return this.getCategories().map(category => this.getCategoryStatistics(category));
+    }
+
+    //return concrete category statistics
+    getCategoryStatistics(category) {
+        return {
+            category: category,
+            active: this.getActiveNotes().filter(note => note.category.id === id).length,
+            archived: this.getArchivedNotes().filter(note => note.category.id === category.id).length,
+            notes: this.getArchivedNotes().filter(note => note.category.id === category.id)
+        }
+    }
+
     //parses dates in format m/d/YYYY from content in array
     parseDates(content) {
         return content.match(/(1[0-2]|0?[1-9])\/(3[01]|[12][0-9]|0?[1-9])\/(?:[0-9]{4})/gm);
