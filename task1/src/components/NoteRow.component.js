@@ -11,13 +11,18 @@ const setData = (row, note) => {
     row.querySelector("#dates").textContent = note.dates;
 }
 
+const setActions = (row, note, actions) => {
+    row.querySelector("#actions > #note-actions").appendChild(actions(note))
+}
+
 //row with Note data
 export const NoteRowComponent = {
     //Creates and fill row 
-    create: (note) => {
+    create: (note, actions) => {
         const rowTemplate = document.querySelector(`#${rowTemplateName}`);
         const row = rowTemplate.content.cloneNode(true);
         setData(row, note)
+        setActions(row, note, actions);
         return row
     }
 }

@@ -4,10 +4,10 @@ const tableTemplateName = "note-table-template";
 const tableBodyName = "notes-table-data";
 
 //fills table with rows 
-const fillTable = (table, notes) => {
+const fillTable = (table, notes, actions) => {
     const tableBody = table.querySelector(`#${tableBodyName}`)
     notes.forEach(note => {
-        const row = NoteRowComponent.create(note);
+        const row = NoteRowComponent.create(note, actions);
         tableBody.appendChild(row);
     })
 }
@@ -15,10 +15,10 @@ const fillTable = (table, notes) => {
 //table with Notes
 export const NoteTableComponent = {
     //creates table with notes
-    create: (notes) => {
+    create: (notes, actions) => {
         const tableTemplate = document.querySelector(`#${tableTemplateName}`);
         const table = tableTemplate.content.cloneNode(true);
-        fillTable(table, notes);
+        fillTable(table, notes, actions);
         return table;
     }
 }
