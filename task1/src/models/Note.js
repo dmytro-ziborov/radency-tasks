@@ -13,13 +13,14 @@ export default class Note {
         this.setData(name, category, content);
         this.isActive = isActive;
     }
-
+    //sets data of table
     setData(name, category, content) {
         this.name = name;
         this.category = category;
         this.content = content;
         this.dates = parseDates(content);
     }
+    //updates status of note
     updateStatus() {
         this.isActive = !this.isActive;
     }
