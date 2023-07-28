@@ -1,136 +1,104 @@
 import Category from "../models/Category.js";
 import Note from "../models/Note.js";
 
-//describes service to work with notes and categories
-class NoteService {
-    //private fields of storages
-    #categories = []
-    #notes = []
+//categories data
+const categories = [
+    new Category("Task", "cart-fill"),
+    new Category("Random Thought", "lightbulb-fill"),
+    new Category("Idea", "lightning")];
 
-    //initiates service and fill it with data
-    constructor() {
-        this.#categories = this.populateCategories();
-        this.#notes = this.populateNotes();
-    }
-    //creates note-object and add it to storage
-    addNote(name, categoryId, content) {
-        try {
-            const note = this.createNote(name, categoryId, content)
-            this.#notes.push(note);
-        } catch (error) {
-            console.error(`Unable to add note`, error)
-        }
-    }
-    //creates object of Note
-    createNote(name, categoryId, content, isActive = true) {
-        const category = this.getCategoryById(categoryId);
-        const dates = this.parseDates(content);
-        return new Note(name, category, content, dates, isActive);
-    }
-    //returns note by id, if note not found - throws error
-    getNoteById(id) {
-        const note = this.#notes.find(n => n.id == id)
-        if (!note)
-            throw new Error(`Note with ${id} no found`)
-        return note;
-    }
-    //returns category by id, if category didn't exists in storage - throws Error
-    getCategoryById(id) {
-        const category = this.getCategories().find(element => element.id == id)
-        if (!category)
-            throw new Error(`Category with ${id} not found`)
-        return category;
-    }
-    //edits note data
-    editNote(noteId, name, categoryID, content) {
-        const note = this.getNoteById(noteId);
-        const category = this.getCategoryById(categoryID);
-        note.name = name;
-        note.category = category;
-        note.content = content;
-        note.dates = this.parseDates(content)
-    }
+//notes data
+const notes = [
+    new Note("Shopping List", categories[0], "Tomatoes, water, bread", false),
+    new Note("Outer life", categories[1], "Should we look for life beyond Earth?"),
+    new Note("Make pull request", categories[0], "make pull request 6/28/2023 or 7/7/2023"),
+    new Note("Wake up", categories[2], "tomorrow (7/29/2023) at 6 am or later"),
+    new Note("Start pet project", categories[2], "do something cool or not"),
+    new Note("Stand by", categories[1], "there must be something"),
+    new Note("", categories[0], ""),
+    new Note("Previous note is empty", categories[1], "yep, it's possible. I have many empty real notes :D"),
+    new Note("it's hidden idea", categories[2], "hidden idea - already idea", false),
+]
+//returns all notes
+const getNotes = () => notes;
 
-    //deletes note from storage
-    deleteNoteById(id) {
-        let index = this.#notes.findIndex(note => note.id === id);
-        if (index === -1)
-            throw new Error(`Note with ${id} not found`);
-        this.#notes.splice(index, 1);
-    }
-
-    //changes note isActive status
-    changeNoteStatus(id) {
-        let note = this.getNoteById(id);
-        if (!note)
-            throw new Error(`Note with ${id} not found`);
-        note.isActive = !note.isActive;
-    }
-
-    //returns all notes
-    getNotes() {
-        return this.#notes;
-    }
-
-    //returns notes by status
-    getNotesByStatus(isActive) { return this.getNotes().filter(note => note.isActive === isActive) }
-
-    //returns active notes
-    getActiveNotes() {
-        return this.getNotesByStatus(true);
-    }
-
-    //returns archived notes
-    getArchivedNotes() {
-        return this.getNotesByStatus(false);
-    }
-
-    //returns all categories
-    getCategories() {
-        return this.#categories;
-    }
-
-    //returns all categories statistics
-    getCategoriesStatistics() {
-        return this.getCategories().map(category => this.getCategoryStatistics(category));
-    }
-
-    //return concrete category statistics
-    getCategoryStatistics(category) {
-        return {
-            category: category,
-            active: this.getActiveNotes().filter(note => note.category.id === category.id).length,
-            archived: this.getArchivedNotes().filter(note => note.category.id === category.id).length,
-            notes: this.getArchivedNotes().filter(note => note.category.id === category.id)
-        }
-    }
-
-    //parses dates in format m/d/YYYY from content in array
-    parseDates(content) {
-        return content.match(/(1[0-2]|0?[1-9])\/(3[01]|[12][0-9]|0?[1-9])\/(?:[0-9]{4})/gm);
-    }
-
-    //creates default set of categories
-    populateCategories() {
-        return [
-            new Category("Task", "cart-fill"),
-            new Category("Random Thought", "lightbulb-fill"),
-            new Category("Idea", "lightning")]
-    }
-    //creates default set of notes
-    populateNotes() {
-        return [
-            this.createNote("Shopping List", 1, "Tomatoes, water, bread", false),
-            this.createNote("Outer life", 2, "Should we look for life beyond Earth?"),
-            this.createNote("Make pull request", 1, "make pull request 6/28/2023 or 7/7/2023"),
-            this.createNote("Wake up", 3, "tomorrow (7/29/2023) at 6 am or later"),
-            this.createNote("Start pet project", 3, "do something cool or not"),
-            this.createNote("Stand by", 2, "there must be something"),
-            this.createNote("", 1, ""),
-            this.createNote("Previous note is empty", 2, "yep, it's possible. I have many empty real notes :D"),
-            this.createNote("it's hidden idea", 3, "hidden idea - already idea", false),
-        ]
+//adds note
+const addNote = (name, categoryId, content) => {
+    try {
+        const category = getCategoryById(categoryId)
+        const note = new Note(name, category, content)
+        notes.push(note)
+    } catch (error) {
+        console.error(`Unable to add note`, error)
     }
 }
 
-export default new NoteService();
+//returns note by id, if note not found - throws error
+const getNoteById = (id) => {
+    const note = notes.find(n => n.id == id)
+    if (!note)
+        throw new Error(`Note with ${id} no found`)
+    return note;
+}
+
+//returns category by id, if category didn't exists in storage - throws Error
+const getCategoryById = (id) => {
+    const category = getCategories().find(element => element.id == id)
+    if (!category)
+        throw new Error(`Category with ${id} not found`)
+    return category;
+}
+
+//edits note data
+const editNote = (noteId, name, categoryID, content) => {
+    const note = getNoteById(noteId);
+    const category = getCategoryById(categoryID);
+
+    note.setData(name, category, content)
+}
+
+//deletes note from storage
+const deleteNoteById = (id) => {
+    let index = notes.findIndex(note => note.id === id);
+    if (index === -1)
+        throw new Error(`Note with ${id} not found`);
+    notes.splice(index, 1);
+}
+
+//changes note isActive status
+const changeNoteStatus = (id) => {
+    let note = getNoteById(id);
+    if (!note)
+        throw new Error(`Note with ${id} not found`);
+    note.updateStatus();
+}
+
+//returns notes by status
+const getNotesByStatus = (isActive) => getNotes().filter(note => note.isActive === isActive);
+
+//returns active notes
+const getActiveNotes = () => getNotesByStatus(true);
+
+//returns archived notes
+const getArchivedNotes = () => getNotesByStatus(false)
+
+//returns all categories
+const getCategories = () => categories;
+
+//returns all categories statistics
+const getCategoriesStatistics = () =>
+    getCategories().map(category => getCategoryStatistics(category));
+
+//return concrete category statistics
+const getCategoryStatistics = (category) => {
+    return {
+        category: category,
+        active: getActiveNotes().filter(note => note.category.id === category.id).length,
+        archived: getArchivedNotes().filter(note => note.category.id === category.id).length,
+        notes: getArchivedNotes().filter(note => note.category.id === category.id)
+    }
+}
+
+export default {
+    getNotes, getActiveNotes, getArchiveNotes: getArchivedNotes, getCategories, getCategoriesStatistics, getCategoryById, getNoteById, editNote, addNote, deleteNoteById, changeNoteStatus
+}
