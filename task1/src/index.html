@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Radency Task 1</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <script src="scripts/script.js" type="module"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+  </head>
+  <body>
+    <div class="container my-5 mx-auto" id="main-container">
+      <div class="container" id="active-notes-container"></div>
+
+      <div
+        class="container d-flex flex-row-reverse"
+        id="note-creator-container"
+      >
+        <button
+          type="button"
+          id="createNoteButton"
+          class="btn btn-outline-secondary"
+          action="add"
+          data-bs-toggle="modal"
+          data-bs-target="#note-form"
+        >
+          Create Note
+        </button>
+      </div>
+
+      <div class="container" id="statistics-container"></div>
+    </div>
+  </body>
+</html>
+
+<!-- Modal form to create or edit form-->
+
+<div
+  class="modal fade"
+  id="note-form"
+  tabindex="-1"
+  aria-labelledby="NoteFormLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="note-form-header">Header</h1>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div>
+            <label for="name-input" class="form-label">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name-input"
+              placeholder="Enter name"
+            />
+          </div>
+          <div>
+            <label for="category-input" class="form-label">Category</label>
+            <select
+              class="form-select"
+              id="category-input"
+              aria-label="Default select example"
+              form="note-form"
+            ></select>
+          </div>
+          <div>
+            <label for="content-input" class="form-label">Content</label>
+            <textarea
+              class="form-control"
+              id="content-input"
+              placeholder="Enter content"
+              rows="5"
+              cols="20"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Submit button template  -->
+<template id="submit-btn-template">
+  <button
+    type="button"
+    class="btn btn-primary"
+    data-bs-dismiss="modal"
+    id="submit-btn"
+  >
+    Text
+  </button>
+</template>
+
+<!-- Template for notes table -->
+<template id="note-table-template">
+  <table class="table my-table" id="notes-table">
+    <thead class="table">
+      <th></th>
+      <th>Name</th>
+      <th>Created</th>
+      <th>Category</th>
+      <th>Content</th>
+      <th>Dates</th>
+      <th>
+        <i class="bi bi-archive-fill header-symbol"></i>
+        <i class="bi bi-trash-fill header-symbol"></i>
+      </th>
+    </thead>
+    <tbody id="notes-table-data"></tbody>
+  </table>
+</template>
+
+<!-- Template for note-row with actions -->
+<template id="note-row-template">
+  <tr class="table-tertiary">
+    <td id="symbol">
+      <i class="category-icon"></i>
+    </td>
+    <td id="name"></td>
+    <td id="created"></td>
+    <td id="category"></td>
+    <td id="content"></td>
+    <td id="dates"></td>
+    <td id="actions">
+      <div
+        class="container"
+        id="note-actions"
+        style="justify-content: space-around"
+      ></div>
+    </td>
+  </tr>
+</template>
+
+<!-- Template for active note actions-->
+<template id="note-active-actions">
+  <a
+    role="button"
+    id="edit"
+    action="edit"
+    data-bs-toggle="modal"
+    data-bs-target="#note-form"
+  >
+    <i class="action bi bi-pencil-fill"></i>
+  </a>
+  <i class="action bi bi-archive-fill" id="archive"></i>
+  <i class="action bi bi-trash-fill" id="delete"></i>
+</template>
+
+<!-- Template for archived note actions-->
+<template id="note-archived-actions">
+  <i class="bi bi-arrow-counterclockwise action" id="unarchive"></i>
+  <i class="action bi bi-trash-fill" id="delete"></i>
+</template>
+
+<!-- Template for categories statistics table -->
+<template id="category-stats-table-template">
+  <table id="category-stats-table" class="table my-table">
+    <thead>
+      <th></th>
+      <th>Note Category</th>
+      <th>Active</th>
+      <th>Archived</th>
+      <th></th>
+    </thead>
+    <tbody id="stats-data"></tbody>
+  </table>
+</template>
+
+<!-- Template for category statistics row -->
+
+<template id="category-stat-row-template">
+  <tr>
+    <td id="symbol"><i class="category-icon"></i></td>
+    <td id="name"></td>
+    <td id="active"></td>
+    <td id="archived"></td>
+    <td id="open">
+      <i
+        id="category-row-"
+        class="bi bi-arrow-down-up action"
+        data-bs-toggle="collapse"
+        role="button"
+        aria-expanded="false"
+        class="table table-primary"
+      ></i>
+    </td>
+  </tr>
+  <tr class="collapse" id="collapse-table-">
+    <td colspan="100%" id="archived-table-container"></td>
+  </tr>
+</template>

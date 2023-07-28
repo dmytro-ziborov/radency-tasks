@@ -1,0 +1,37 @@
+i {
+    font-size: 18px;
+    /* background-color: transparent!important; */
+}
+
+i.category-icon{
+    border-radius: 25px;
+    background: rgb(136, 136, 136);
+    padding: 0.5rem;
+}
+i.action:hover{
+    color:cornflowerblue;
+}
+
+table {
+    border-collapse: separate !important;
+    border-spacing: 0 0.5rem !important;
+}
+
+table i.header-symbol {
+    color: white !important;
+    background-color: transparent!important;
+}
+
+.my-table table{
+    border-collapse: separate;
+    border-spacing: 0 0.5rem;
+}
+
+.my-table thead th{
+    background-color: darkgray;
+    color: white;
+}
+
+.my-table tr td{
+    background-color: #d7ebf2;
+}
