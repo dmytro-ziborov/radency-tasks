@@ -2,7 +2,7 @@ let idCounter = 1;
 
 //parses dates in format m/d/YYYY from content in array
 const parseDates = (value) => {
-    return value.match(/(1[0-2]|0?[1-9])\/(3[01]|[12][0-9]|0?[1-9])\/(?:[0-9]{4})/gm);
+    return value.match(/\b(1[0-2]|0?[1-9])\/(3[01]|[12][0-9]|0?[1-9])\/(?:[0-9]{4})/gm);
 }
 
 //Describes Note object
