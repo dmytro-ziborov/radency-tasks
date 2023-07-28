@@ -33,7 +33,7 @@ const init = () => {
     NoteFormComponent.create(NoteService, RenderService)
 }
 
-//de4scribes service to control data on the page
+//describes service to control data on the page
 export const RenderService = {
     init, updateTables
 }
