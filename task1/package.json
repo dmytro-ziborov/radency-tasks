@@ -1,0 +1,14 @@
+{
+  "name": "radency-task1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/scripts/script.js",
+  "scripts": {
+    "start": "vite serve src"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "vite": "^4.4.7"
+  }
+}
