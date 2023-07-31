@@ -1,7 +1,7 @@
-import Category from "../models/Category.js";
 import Note from "../models/Note.js";
 import categories from '../data/categories.js';
 import notes from '../data/notes.js'
+
 //returns all notes
 const getNotes = () => notes;
 
@@ -41,7 +41,6 @@ const editNote = (noteId, name, categoryID, content) => {
     } catch (error) {
         console.error(`Error on editing node`, error)
     }
-
 }
 
 //deletes note from storage
