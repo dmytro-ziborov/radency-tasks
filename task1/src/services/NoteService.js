@@ -51,26 +51,41 @@ const getCategoryById = (id) => {
 
 //edits note data
 const editNote = (noteId, name, categoryID, content) => {
-    const note = getNoteById(noteId);
-    const category = getCategoryById(categoryID);
+    try {
+        const note = getNoteById(noteId);
+        const category = getCategoryById(categoryID);
+        note.setData(name, category, content)
+    } catch (error) {
+        console.error(`Error on editing node`, error)
+    }
 
-    note.setData(name, category, content)
 }
 
 //deletes note from storage
 const deleteNoteById = (id) => {
+    try {
+        const index = findNoteIndex(id);
+        notes.splice(index, 1);
+    } catch (error) {
+        console.error(`Error on deleting note with id ${id}`);
+    }
+}
+
+const findNoteIndex = (id) => {
     let index = notes.findIndex(note => note.id === id);
     if (index === -1)
         throw new Error(`Note with ${id} not found`);
-    notes.splice(index, 1);
+    return index;
 }
 
 //changes note isActive status
 const changeNoteStatus = (id) => {
-    let note = getNoteById(id);
-    if (!note)
-        throw new Error(`Note with ${id} not found`);
-    note.updateStatus();
+    try {
+        let note = getNoteById(id);
+        note.updateStatus();
+    } catch (error) {
+        console.log(`Error on changing note status`, error)
+    }
 }
 
 //returns notes by status
