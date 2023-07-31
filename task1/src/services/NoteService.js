@@ -1,24 +1,7 @@
 import Category from "../models/Category.js";
 import Note from "../models/Note.js";
-
-//categories data
-const categories = [
-    new Category("Task", "cart-fill"),
-    new Category("Random Thought", "lightbulb-fill"),
-    new Category("Idea", "lightning")];
-
-//notes data
-const notes = [
-    new Note("Shopping List", categories[0], "Tomatoes, water, bread", false),
-    new Note("Outer life", categories[1], "Should we look for life beyond Earth?"),
-    new Note("Make pull request", categories[0], "make pull request 6/28/2023 or 7/7/2023"),
-    new Note("Wake up", categories[2], "tomorrow (7/29/2023) at 6 am or later"),
-    new Note("Start pet project", categories[2], "do something cool or not"),
-    new Note("Stand by", categories[1], "there must be something"),
-    new Note("", categories[0], ""),
-    new Note("Previous note is empty", categories[1], "yep, it's possible. I have many empty real notes :D"),
-    new Note("it's hidden idea", categories[2], "hidden idea - already idea", false),
-]
+import categories from '../data/categories.js';
+import notes from '../data/notes.js'
 //returns all notes
 const getNotes = () => notes;
 
